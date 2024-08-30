@@ -1,4 +1,6 @@
 from datetime import datetime
+import os
+
 
 from sqlalchemy import (
     Column, DateTime, ForeignKey, Integer, MetaData, Numeric, String, Table, create_engine
@@ -48,3 +50,8 @@ line_items = Table(
     Column('quantity', Integer()),
     Column('extended_cost', Numeric(12, 2))
 )
+
+
+current_folder = os.path.dirname(os.path.abspath(__file__))
+engine = create_engine('sqlite:///' + os.path.join(current_folder, 'cookies.db'))
+metadata.create_all(engine)
