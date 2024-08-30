@@ -34,7 +34,17 @@ orders = Table(
     'orders',
     metadata,
     Column('order_id', Integer(), primary_key=True),
-    Column('user_id', ForeignKey('users.user_id'))
+    Column('user_id', ForeignKey('users.user_id')),
+    Column('created_on', DateTime(), default=datetime.now),
+    Column('updated_on', DateTime(), default=datetime.now, onupdate=datetime.now)
 )
 
-
+line_items = Table(
+    'line_items',
+    metadata,
+    Column('line_items_id', Integer(), primary_key=True),
+    Column('order_id', ForeignKey('orders.order_id')),
+    Column('cookie_id', ForeignKey('cookies.cookie_id')),
+    Column('quantity', Integer()),
+    Column('extended_cost', Numeric(12, 2))
+)
