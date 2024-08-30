@@ -29,3 +29,12 @@ users = Table(
     Column('created_on', DateTime(), default=datetime.now),
     Column('updated_on', DateTime(), default=datetime.now, onupdate=datetime.now)
 )
+
+orders = Table(
+    'orders',
+    metadata,
+    Column('order_id', Integer(), primary_key=True),
+    Column('user_id', ForeignKey('users.user_id'))
+)
+
+
